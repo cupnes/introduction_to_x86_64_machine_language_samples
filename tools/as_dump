@@ -7,8 +7,7 @@ work_dir=$(mktemp -d)
 
 if [ $# -gt 0 ]; then
 	if [ "$1" = "-f" ]; then
-		shift
-		as -o ${work_dir}/a.out $@
+		as -o ${work_dir}/a.out $2
 	else
 		echo $@ | as -o ${work_dir}/a.out
 	fi
