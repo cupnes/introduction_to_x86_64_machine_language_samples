@@ -9,6 +9,6 @@ fi
 
 FILE=$1
 
-cut -d'#' -f1 ${FILE} | tr ' ' '\n' | tr '\t' '\n' | grep -v '^$' | while read val; do
+cut -d'#' -f1 ${FILE} | cut -d':' -f2 | tr ' ' '\n' | tr '\t' '\n' | grep -v '^$' | while read val; do
 	printf "\x${val}"
 done
