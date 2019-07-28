@@ -1,0 +1,4 @@
+b0 00	# 0x00 -> al
+24 20	# and $0x20,%al
+f4	# hlt
+eb fd	# jmp -1

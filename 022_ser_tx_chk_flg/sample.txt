@@ -1,0 +1,9 @@
+66 ba fd 03	# 0x03fd -> dx
+ec		# IO Addr(dx) -> al
+24 20		# and $0x20,%al
+74 fb		# je -3
+b0 41		# 0x41 -> al
+66 ba f8 03	# 0x03f8 -> dx
+ee		# al -> IO Addr(dx)
+f4		# hlt
+eb fd		# jmp -1

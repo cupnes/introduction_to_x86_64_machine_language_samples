@@ -1,0 +1,4 @@
+66 ba fd 03	# 0x03fd -> dx
+ec		# IO Addr(dx) -> al
+f4		# hlt
+eb fd		# jmp -1
