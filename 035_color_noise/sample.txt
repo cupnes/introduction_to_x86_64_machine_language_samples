@@ -1,0 +1,34 @@
+# (width,height) -> (ebx,ecx)
+# FB addr -> rax
+00: 48 89 f0	# rsi -> rax
+03: 8b 58 10	# *(rax + 0x10) -> ebx
+06: 8b 48 14	# *(rax + 0x14) -> ecx
+09: 48 8b 00	# *rax -> rax
+
+# edxをカウンタとして、esiをwidth*heightの定数として初期化
+0c: ba 00 00 00 00	# 0 -> edx
+11: 89 ce		# ecx -> esi
+13: 0f af f3		# ebx * esi -> esi
+
+# ループ判定
+16: 39 d6		# ? esi - edx
+18: 76 0e		# jmp to +0x10(0x28) if below or equal (CF=1 | ZF=1)
+
+# draw pixel
+1a: 0f c7 f7		# rand -> edi
+1d: 89 38		# edi -> *rax
+1f: 48 83 c0 04		# rax + 4 -> rax
+
+# edxをインクリメント
+23: 83 c2 01		# edx++
+26: eb ee		# jmp to -0x10(0x16)
+
+# 無限ループhalt
+28: f4		# hlt
+29: eb fd	# jmp -1
+
+# RAX=00000000c01d4c00 RBX=0000000000000320 RCX=0000000000000258 RDX=0000000000075300
+# RSI=0000000000075300 RDI=0000000046aadada RBP=00000000bff0eb10 RSP=0000000000210000
+# R8 =00000000bff0e9dc R9 =0000000000000078 R10=00000000bfe6e080 R11=00000000e7dc4657
+# R12=00000000bef69540 R13=00000000bef69548 R14=00000000bff24b60 R15=00000000bef6a018
+# RIP=0000000000110029 RFL=00000046 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=1
