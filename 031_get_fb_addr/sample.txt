@@ -1,5 +1,5 @@
-48 89 f0	# rsi -> rax
-48 8b 00	# *rax -> rax
+# フレームバッファの先頭アドレスをRAXへコピー
+48 8b 06	# (rsi) -> rax
 
 # 無限ループhalt
 f4		# hlt
