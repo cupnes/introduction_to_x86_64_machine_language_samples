@@ -1,7 +1,9 @@
-48 89 f0	# rsi -> rax
-8b 58 10	# *(rax + 0x10) -> ebx
-8b 48 14	# *(rax + 0x14) -> ecx
-48 8b 00	# *rax -> rax
+# フレームバッファの先頭アドレスをRAXへコピー
+48 8b 06	# (rsi) -> rax
+
+# 幅をEBXへ、高さをECXへコピー
+8b 5e 10	# 0x10(rsi) -> ebx
+8b 4e 14	# 0x14(rsi) -> ecx
 
 # 無限ループhalt
 f4		# hlt
@@ -12,7 +14,7 @@ eb fd		# jmp -1
 # RSI=0000000000407180 RDI=00000000bfe9b018 RBP=00000000bff0eb10 RSP=0000000000210000
 # R8 =00000000bff0e9dc R9 =0000000000000078 R10=00000000bfe6e080 R11=00000000e7dc4657
 # R12=00000000bef69540 R13=00000000bef69548 R14=00000000bff24b60 R15=00000000bef6a018
-# RIP=000000000011000d RFL=00000002 [-------] CPL=0 II=0 A20=1 SMM=0 HLT=1
+# RIP=000000000011000a RFL=00000002 [-------] CPL=0 II=0 A20=1 SMM=0 HLT=1
 
 # ➜  032_get_width_height git:(next) ✗ echo 'ibase=16;320' | bc
 # 800
