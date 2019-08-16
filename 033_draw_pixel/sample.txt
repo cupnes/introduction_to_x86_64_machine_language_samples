@@ -1,13 +1,16 @@
-# FB addr -> rax
-48 89 f0	# rsi -> rax
-48 8b 00	# *rax -> rax
+# フレームバッファの先頭アドレスをRAXへコピー
+48 8b 06	# (rsi) -> rax
 
-# draw pixel
-c7 00 ff ff ff 00	# (b,g,r,_r)=(00,ff,00,00) -> (x,y)=(0,0)
+# 幅をEBXへ、高さをECXへコピー
+8b 5e 10	# 0x10(rsi) -> ebx
+8b 4e 14	# 0x14(rsi) -> ecx
+
+# 画面左上(0,0)を緑(0x00,0xff,0x00,0x00)で塗る
+c7 00 00 ff 00 00	# (B,G,R,RSV)=(00,ff,00,00) -> (X,Y)=(0,0)
 
 # 無限ループhalt
 f4		# hlt
 eb fd		# jmp -1
 
-# (qemu) x/wx 0xc0000000
-# 00000000c0000000: 0x00ffffff
+# (qemu) x/4bx 0xc0000000
+# 00000000c0000000: 0x00 0xff 0x00 0x00
