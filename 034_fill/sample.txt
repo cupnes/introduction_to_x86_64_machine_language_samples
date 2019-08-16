@@ -1,30 +1,30 @@
-# (width,height) -> (ebx,ecx)
-# FB addr -> rax
-00: 48 89 f0	# rsi -> rax
-03: 8b 58 10	# *(rax + 0x10) -> ebx
-06: 8b 48 14	# *(rax + 0x14) -> ecx
-09: 48 8b 00	# *rax -> rax
+# フレームバッファの先頭アドレスをRAXへコピー
+00: 48 8b 06	# (rsi) -> rax
+
+# 幅をEBXへ、高さをECXへコピー
+03: 8b 5e 10	# 0x10(rsi) -> ebx
+06: 8b 4e 14	# 0x14(rsi) -> ecx
 
 # edxをカウンタとして、esiをwidth*heightの定数として初期化
-0c: ba 00 00 00 00	# 0 -> edx
-11: 89 ce		# ecx -> esi
-13: 0f af f3		# ebx * esi -> esi
+09: ba 00 00 00 00	# 0 -> edx
+0e: 89 ce		# ecx -> esi
+10: 0f af f3		# ebx * esi -> esi
 
 # ループ判定
-16: 39 d6		# ? esi - edx
-18: 76 0f		# jmp to +0x11(0x29) if below or equal (CF=1 | ZF=1)
+13: 39 d6		# ? esi - edx
+15: 76 0f		# EDX >= ESI なら +0x11(0x26) へジャンプ
 
-# draw pixel
-1a: c7 00 ff ff ff 00	# (b,g,r,_r)=(00,ff,00,00) -> (x,y)=(0,0)
-20: 48 83 c0 04		# rax + 4 -> rax
+# 1ピクセル描画
+17: c7 00 00 ff 00 00	# (B,G,R,RSV)=(00,ff,00,00) -> (X,Y)=(0,0)
+1d: 48 83 c0 04		# rax + 4 -> rax
 
 # edxをインクリメント
-24: 83 c2 01		# edx++
-27: eb ed		# jmp to -0x11(0x16)
+21: 83 c2 01		# edx++
+24: eb ed		# -0x11(0x13) へジャンプ
 
 # 無限ループhalt
-29: f4		# hlt
-2a: eb fd	# jmp -1
+26: f4		# hlt
+27: eb fd	# -1(0x26)へジャンプ
 
 # RAX=00000000c01d4c00 RBX=0000000000000320 RCX=0000000000000258 RDX=0000000000075300
 # RSI=0000000000075300 RDI=00000000bfe9b018 RBP=00000000bff0eb10 RSP=0000000000210000
