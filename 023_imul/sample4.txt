@@ -1,0 +1,13 @@
+66 b8 00 01	# 0x0100 -> AX
+66 b9 ef 7e	# 0x7eef -> CX
+66 f7 e9	# AX * CX -> DX:AX
+
+# haltで無限ループ
+f4		# hlt
+eb fd		# jmp -1
+
+# $ echo 'obase=16;ibase=16;7EEF*100' | bc
+# 7EEF00
+
+# RAX=000000000011ef00 RBX=00000000bef6ab18 RCX=0000000000007eef RDX=000000000000007e
+# -> DX:AX=0x007eef00
