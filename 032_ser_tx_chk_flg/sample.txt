@@ -1,15 +1,15 @@
 # シリアルポートのステータス取得
 00: 66 ba fd 03	# 0x03fd -> DX
-04: ec		# IO Addr(DX) -> AL
+04: ec		# (IO Addr DX) -> AL
 
 # 送信バッファが空でなければステータス取得まで戻る
-05: 24 20	# 0x20 & AL -> AL
+05: 24 20	# AL and 0x20 -> AL
 07: 74 fb	# Jump(Equal) -3
 
 # ASCII文字'A'(0x41)をシリアルポートへ送信
 09: b0 41	# 0x41('A') -> AL
 0b: 66 ba f8 03	# 0x03f8 -> DX
-0f: ee		# AL -> IO Addr(DX)
+0f: ee		# AL -> (IO Addr DX)
 
 # 無限Halt
 10: f4		# Halt

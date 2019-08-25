@@ -1,4 +1,7 @@
-b0 00	# 0x00 -> al
-24 20	# and $0x20,%al
-f4	# hlt
-eb fd	# jmp -1
+# 0x00と0x20のANDでゼロフラグを立てる
+b0 00	# 0x00 -> AL
+24 20	# AL and 0x20 -> AL
+
+# 無限Halt
+f4	# Halt
+eb fd	# Jump -1
