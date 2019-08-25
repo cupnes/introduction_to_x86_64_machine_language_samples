@@ -1,9 +1,9 @@
 # フレームバッファ先頭アドレスをRAXへ格納
-00: 48 8b 06	# (RSI) -> RAX
+00: 48 8b 06	# mov (%rsi),%rax
 
 # 無限Halt
-03: f4		# Halt
-04: eb fd	# Jump -1
+03: f4		# hlt
+04: eb fd	# jmp -1
 
 # [実行結果の例]
 # (qemu) info registers
