@@ -32,6 +32,6 @@
 28: 2c 0d	# sub $0x0d,%al
 2a: 75 d4	# jne -0x2a
 
-# LFを受信データとして(*1)まで戻る
+# LF(0x0a)を受信データとして(*1)まで戻る
 2c: b3 0a	# mov $0x0a,%bl
 2e: eb e4	# jmp -0x1a
