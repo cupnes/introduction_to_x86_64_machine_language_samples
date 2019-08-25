@@ -1,7 +1,7 @@
 # シリアルポートのステータス取得
-66 ba fd 03	# 0x03fd -> DX
-ec		# (IO Addr DX) -> AL
+66 ba fd 03	# mov $0x03fd,%dx
+ec		# in (%dx),%al
 
 # 無限Halt
-f4		# Halt
-eb fd		# Jump -1
+f4		# hlt
+eb fd		# jmp -1
