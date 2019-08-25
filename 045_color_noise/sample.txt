@@ -14,7 +14,7 @@
 16: 39 d6		# ? ESI - EDX
 18: 76 0e		# Jump(Below or Equal) +0x10
 
-# 1ピクセルをランダム色で描画し次のピクセルへ移動
+# 現在のピクセルをランダム色で描画し次のピクセルへ移動
 1a: 0f c7 f7		# Random -> EDI
 1d: 89 38		# EDI -> *RAX
 1f: 48 83 c0 04		# RAX + 4 -> RAX
