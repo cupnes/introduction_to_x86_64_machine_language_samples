@@ -1,37 +1,37 @@
 # シリアルポートのステータス取得
-00: 66 ba fd 03	# 0x03fd -> dx
-04: ec		# IO Addr(dx) -> al
+00: 66 ba fd 03	# 0x03fd -> DX
+04: ec		# (IO Addr DX) -> AL
 
 # 受信バッファにデータが無ければpauseしステータス取得まで戻る
-05: 24 20	# and $0x01,%al
-07: 75 04	# jne +6
-09: f3 90	# pause
-0b: eb f7	# jmp -7
+05: 24 20	# AL and 0x01 -> AL
+07: 75 04	# Jump(NotEqual) +6
+09: f3 90	# Pause
+0b: eb f7	# Jump -7
 
 # 受信バッファのデータを取得
-0d: 66 ba f8 03	# 0x03f8 -> dx
-11: ec		# IO Addr(dx) -> al
-12: 88 c3	# al -> bl
+0d: 66 ba f8 03	# 0x03f8 -> DX
+11: ec		# (IO Addr DX) -> AL
+12: 88 c3	# AL -> BL
 
 # シリアルポートのステータス取得(*1)
-14: 66 ba fd 03	# 0x03fd -> dx
-18: ec		# IO Addr(dx) -> al
+14: 66 ba fd 03	# 0x03fd -> DX
+18: ec		# (IO Addr DX) -> AL
 
 # 送信バッファが空でなければpauseしステータス取得まで戻る
-19: 24 20	# and $0x20,%al
-1b: 75 04	# jne +6
-1d: f3 90	# pause
-1f: 74 f7	# je -7
+19: 24 20	# AL and 0x20 -> AL
+1b: 75 04	# Jump(NotEqual) +6
+1d: f3 90	# Pause
+1f: 74 f7	# Jump(Equal) -7
 
 # 受信バッファのから取得したデータを送信
-21: 88 d8	# bl -> al
-23: 66 ba f8 03	# 0x03f8 -> dx
-27: ee		# al -> IO Addr(dx)
+21: 88 d8	# BL -> AL
+23: 66 ba f8 03	# 0x03f8 -> DX
+27: ee		# AL -> (IO Addr DX)
 
-# 送信したデータがCRでなければ先頭まで戻る
-28: 2c 0d	# sub $0xd,%al
-2a: 75 d4	# jne -0x2a
+# 送信したデータがCR(0x0d)でなければ先頭まで戻る
+28: 2c 0d	# AL - 0x0d -> AL
+2a: 75 d4	# Jump(NotEqual) -0x2a
 
 # LFを受信データとして(*1)まで戻る
-2c: b3 0a	# 0x0a -> bl
-2e: eb e4	# jmp -0x1a
+2c: b3 0a	# 0x0a -> BL
+2e: eb e4	# Jump -0x1a
