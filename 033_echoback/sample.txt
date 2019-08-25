@@ -2,7 +2,7 @@
 00: 66 ba fd 03	# 0x03fd -> DX
 04: ec		# (IO Addr DX) -> AL
 
-# 受信バッファにデータが無ければpauseしステータス取得まで戻る
+# 受信バッファが空であればpauseしステータス取得まで戻る
 05: 24 20	# AL and 0x01 -> AL
 07: 75 04	# Jump(NotEqual) +6
 09: f3 90	# Pause
