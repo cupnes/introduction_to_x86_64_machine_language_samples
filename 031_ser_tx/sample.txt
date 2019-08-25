@@ -1,8 +1,8 @@
 # ASCII文字'A'(0x41)をシリアルポートへ送信
-b0 41		# 0x41 -> AL
-66 ba f8 03	# 0x03f8 -> DX
-ee		# AL -> (IO Addr DX)
+b0 41		# mov $0x41,%al
+66 ba f8 03	# mov $0x03f8,%dx
+ee		# out %al,(%dx)
 
 # 無限Halt
-f4		# Halt
-eb fd		# Jump -1
+f4		# hlt
+eb fd		# jmp -1
