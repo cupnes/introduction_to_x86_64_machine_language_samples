@@ -1,7 +1,7 @@
 # 何らかの処理
-90	# No Operation
-90	# No Operation
+90	# nop
+90	# nop
 
 # 無限Halt
-f4	# Halt
-eb fd	# Jump -1
+f4	# hlt
+eb fd	# jmp -1
