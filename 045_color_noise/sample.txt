@@ -1,30 +1,30 @@
 # フレームバッファ先頭アドレスをRAXへ
 # 画面の幅をEBXへ、高さをECXへ格納
-00: 48 8b 06		# (RSI) -> RAX
-03: 8b 5e 10		# 0x10(RSI) -> EBX
-06: 8b 4e 14		# 0x14(RSI) -> ECX
+00: 48 8b 06	# mov (%rsi),%rax
+03: 8b 5e 10	# mov 0x10(%rsi),%ebx
+06: 8b 4e 14	# mov 0x14(%rsi),%ecx
 
 # EDXを「カウンタ」、ESIを「画面ピクセル数(幅*高さ)」で初期化
-09: ba 00 00 00 00	# 0 -> EDX
-0e: 89 ce		# ECX -> ESI
-10: 0f af f3		# EBX * ESI -> ESI
+09: 31 d2	# xor %edx,%edx
+0b: 89 ce	# mov %ecx,%esi
+0d: 0f af f3	# imul %ebx,%esi
 
-# カウンタ(EDX)が画面ピクセル数(ESI)へ達したら「無限Halt」へジャンプ
-13: 39 d6		# ? ESI - EDX
-15: 76 0e		# Jump(Below or Equal) +0x10
+# カウンタ(EDX)が画面ピクセル数(ESI)へ達したら「無限Halt」へジャンプ(*1)
+10: 39 d6	# cmp %edx,%esi
+12: 76 0d	# jbe +0x0f
 
 # 現在のピクセルをランダム色で描画し次のピクセルへ移動
-17: 0f c7 f7		# Random -> EDI
-1a: 89 38		# EDI -> (RAX)
-1c: 48 83 c0 04		# RAX + 4 -> RAX
+14: 0f c7 f7	# rdrand %edi
+17: 89 38	# mov %edi,(%rax)
+19: 48 83 c0 04	# add $4,%rax
 
-# カウンタ(EDX)をインクリメント
-20: 83 c2 01		# EDX++
-23: eb ee		# Jump -0x10
+# カウンタ(EDX)をインクリメントし(*1)へジャンプ
+1d: ff c2	# inc %edx
+1f: eb ef	# jmp -0x0f
 
 # 無限Halt
-25: f4			# Halt
-26: eb fd		# Jump -1
+21: f4		# hlt
+22: eb fd	# jmp -1
 
 # [実行結果の例]
 # RAX=00000000c01d4c00 RBX=0000000000000320 RCX=0000000000000258 RDX=0000000000075300
