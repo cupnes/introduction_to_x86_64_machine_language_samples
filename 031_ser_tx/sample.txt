@@ -1,7 +1,7 @@
 # ASCII文字'A'(0x41)をシリアルポートへ送信
 b0 41		# mov $0x41,%al
 66 ba f8 03	# mov $0x03f8,%dx
-ee		# out %al,(%dx)
+ee		# out %al,%dx
 
 # 無限Halt
 f4		# hlt

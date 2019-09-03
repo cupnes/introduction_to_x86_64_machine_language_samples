@@ -1,6 +1,6 @@
 # シリアルポートのステータス取得
 66 ba fd 03	# mov $0x03fd,%dx
-ec		# in (%dx),%al
+ec		# in %dx,%al
 
 # 無限Halt
 f4		# hlt

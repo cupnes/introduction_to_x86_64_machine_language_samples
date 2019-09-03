@@ -1,6 +1,6 @@
 # シリアルポートのステータス取得
 00: 66 ba fd 03	# mov $0x03fd,%dx
-04: ec		# in (%dx),%al
+04: ec		# in %dx,%al
 
 # 受信バッファが空であればpauseしステータス取得まで戻る
 05: 24 01	# and $0x01,%al
@@ -10,12 +10,12 @@
 
 # 受信バッファのデータを取得
 0d: 66 ba f8 03	# mov $0x03f8,%dx
-11: ec		# in (%dx),%al
+11: ec		# in %dx,%al
 12: 88 c3	# mov %al,%bl
 
 # シリアルポートのステータス取得(*1)
 14: 66 ba fd 03	# mov $0x03fd,%dx
-18: ec		# in (%dx),%al
+18: ec		# in %dx,%al
 
 # 送信バッファが空でなければpauseしステータス取得まで戻る
 19: 24 20	# and $0x20,%al
@@ -26,7 +26,7 @@
 # 受信バッファから取得したデータを送信
 21: 88 d8	# mov %bl,%al
 23: 66 ba f8 03	# mov $0x03f8,%dx
-27: ee		# out %al,(%dx)
+27: ee		# out %al,%dx
 
 # 送信したデータがCR(0x0d)でなければ先頭まで戻る
 28: 3c 0d	# cmp $0x0d,%al
