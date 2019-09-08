@@ -1,7 +1,0 @@
-48 b8 67 45 23 01 fe ca ef be
-48 c7 c0 00 00 11 00
-07: 90	# nop
-08: 90	# nop
-09: 90	# nop
-10: f4		# hlt
-11: eb fd		# jmp -1

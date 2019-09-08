@@ -1,9 +1,0 @@
-66 b8 00 01	# 0x0100 -> AX
-66 b9 ef 00	# 0x00ef -> CX
-66 0f af c8	# AX * CX -> CX
-
-# haltで無限ループ
-f4		# hlt
-eb fd		# jmp -1
-
-# RAX=0000000000110100 RBX=00000000bef6ab18 RCX=000000000000ef00 RDX=0000000000000000

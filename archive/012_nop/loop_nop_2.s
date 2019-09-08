@@ -1,2 +1,0 @@
-	jmp	loop
-loop:	jmp	.

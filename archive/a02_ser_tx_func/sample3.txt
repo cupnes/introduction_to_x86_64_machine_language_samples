@@ -1,6 +1,0 @@
-00: 48 c7 c0 0c 00 11 00	# 0x0011000c -> rax
-07: ff d0	# call *rax
-09: f4		# hlt
-0a: eb fd		# jmp -1
-0c: f4		# hlt
-0d: eb fd		# jmp -1

@@ -1,2 +1,0 @@
-f4	# hlt
-eb fd	# jmp to -1

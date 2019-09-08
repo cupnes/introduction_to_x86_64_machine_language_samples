@@ -1,2 +1,0 @@
-0: eb 00	# jmp +2
-2: eb fc	# jmp -2

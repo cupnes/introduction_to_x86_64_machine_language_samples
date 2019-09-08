@@ -1,3 +1,0 @@
-00: eb 01	# jmp	3
-02: 90		# nop
-03: eb fe	# jmp	.
